@@ -1,5 +1,4 @@
-import express from 'express';
-import { Request, Response } from 'express';
+import express, { Request, Response } from 'express';
 import cors from 'cors';
 import { controllers } from './controllers';
 
@@ -8,8 +7,8 @@ export const startHttpServer = (port: number) => {
     app.use(express.json())
     app.use(cors())
 
-    controllers.forEach((Controller) => {
-        const instance = new Controller();
+    controllers.forEach(controller => {
+        const instance = new controller();
 
         if (!instance.path || !instance.router) {
             throw new Error('Controller must have a path and a router')
